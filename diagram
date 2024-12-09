@@ -1,0 +1,164 @@
+Table User {
+  _id ObjectId [pk]
+  name String
+  email String [unique]
+  password String
+  role String [note: "buyer, seller, admin"]
+  phoneNumber String
+  isBanned boolean
+  googleId varchar [unique]
+  createdAt Date
+  updatedAt Date
+}
+
+Table Address {
+  _id ObjectId [pk]
+  userId ObjectId [ref: - User._id]
+  title String
+  province String
+  city String
+  district String
+  subdistrict String
+  postalCode Number
+  createdAt Date
+  updatedAt Date
+}
+
+Table UserImage {
+  _id ObjectId [pk]
+  name String
+  path String
+  url String
+  userId ObjectId [ref: - User._id]
+  createdAt Date
+  updatedAt Date
+}
+
+Table Shop {
+  _id ObjectId [pk]
+  name String
+  description String
+  ownerId ObjectId [ref: > User._id]
+  createdAt Date
+  updatedAt Date
+}
+
+Table ShopImage {
+  _id ObjectId [pk]
+  name String
+  path String
+  url String
+  shopId ObjectId [ref: - Shop._id]
+  createdAt Date
+  updatedAt Date
+}
+
+Table ShopBanner {
+  _id ObjectId [pk]
+  name String
+  path String
+  url String
+  shopId ObjectId [ref: - Shop._id]
+  createdAt Date
+  updatedAt Date
+}
+
+Table Product {
+  _id ObjectId [pk]
+  name String
+  description String
+  price Number
+  shopId ObjectId [ref: > Shop._id]
+  stock Number
+  categoryId ObjectId [ref: - Category._id]
+  tag String
+  createdAt Date
+  updatedAt Date
+}
+
+Table ProductImage {
+  _id ObjectId [pk]
+  name String
+  path String
+  url String
+  productId ObjectId [ref: - Product._id]
+  createdAt Date
+  updatedAt Date
+}
+
+Table ProductCover {
+  _id ObjectId [pk]
+  name String
+  path String
+  url String
+  productId ObjectId [ref: - Product._id]
+  createdAt Date
+  updatedAt Date
+}
+
+Table Category {
+  _id ObjectId [pk]
+  name String
+  description String
+  createdAt Date
+  updatedAt Date
+}
+
+Table Discuss {
+  _id ObjectId [pk]
+  productId ObjectId [ref: - Product._id]
+  userId ObjectId [ref: - User._id]
+  replyId ObjectId [ref: - Product._id, default: "null"]
+  chat String
+  createdAt Date
+  updatedAt Date
+}
+
+Table ApiUsage {
+  _id ObjectId [pk]
+  endpoint String
+  count Number
+  createdAt Date
+  updatedAt Date
+}
+
+Table HeroBanner {
+  _id ObjectId [pk]
+  path String
+  url String
+  createdAt Date
+  updatedAt Date
+}
+
+Table Article {
+  _id ObjectId [pk]
+  productId ObjectId [ref: - Product._id, default: "null"]
+  userId ObjectId [ref: - User._id]
+  title String
+  content String
+  createdAt Date
+  updatedAt Date
+}
+
+Table ArticleBanner {
+  _id ObjectId [pk]
+  name String
+  path String
+  url String
+  articleId ObjectId [ref: - Article._id]
+  createdAt Date
+  updatedAt Date
+}
+
+Table Wishlist {
+  _id ObjectId [pk]
+  product
+  path String
+  url String
+  articleId ObjectId [ref: - Article._id]
+  createdAt Date
+  updatedAt Date
+}
+
+
+
